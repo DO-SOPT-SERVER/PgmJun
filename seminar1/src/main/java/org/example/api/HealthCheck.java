@@ -3,8 +3,10 @@ package org.example.api;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.example.dto.ApiResponse;
 import org.example.dto.HealthCheckResponse;
 import org.example.sample.Person;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -46,5 +48,10 @@ public class HealthCheck {
 	@RequestMapping("/v5")
 	public ResponseEntity<HealthCheckResponse> healthCheckV5() {
 		return ResponseEntity.ok(new HealthCheckResponse("ok"));
+	}
+
+	@RequestMapping("/v6")
+	public ApiResponse healthCheckV6() {
+		return ApiResponse.success(HttpStatus.OK);
 	}
 }

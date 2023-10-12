@@ -1,5 +1,8 @@
 package org.example.dto;
 
+import lombok.Getter;
+
+@Getter
 public class HealthCheckResponse {
 	private String status;
 
