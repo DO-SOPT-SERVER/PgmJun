@@ -4,7 +4,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.example.dto.HealthCheckResponse;
-import org.example.sample.Person;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -23,10 +22,6 @@ public class HealthCheck {
 
 	@RequestMapping("/v2")
 	public ResponseEntity<?> healthCheckV2() {
-		Person.builder()
-			.lastName("승준")
-			.firstName("최")
-			.build();
 		return ResponseEntity.ok("OK");
 	}
 
