@@ -13,17 +13,18 @@ import lombok.Getter;
 public class ApiResponse <T>{
 
 	private final HttpStatus status;
+	private final String message;
 	private T data;
 
-	public static <T> ApiResponse<T> success(HttpStatus status) {
-		return new ApiResponse(status);
+	public static <T> ApiResponse<T> success(HttpStatus status, String message) {
+		return new ApiResponse(status, message);
 	}
 
-	public static <T> ApiResponse<T> success(HttpStatus status, T data) {
-		return new ApiResponse(status, data);
+	public static <T> ApiResponse<T> success(HttpStatus status, String message, T data) {
+		return new ApiResponse(status, message, data);
 	}
 
-	public static <T> ApiResponse<T> fail(HttpStatus status) {
-		return new ApiResponse(status);
+	public static <T> ApiResponse<T> fail(HttpStatus status, String message) {
+		return new ApiResponse(status, message);
 	}
 }
