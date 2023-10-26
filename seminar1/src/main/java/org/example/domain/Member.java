@@ -9,13 +9,15 @@ import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.example.dto.request.MemberProfileUpdateRequest;
 
 @Entity
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Member {
 
-	@Id  @GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	private String name;
 	private String nickname;
@@ -30,5 +32,10 @@ public class Member {
 		this.nickname = nickname;
 		this.age = age;
 		this.sopt = sopt;
+	}
+
+	public void changeSoptProfile(MemberProfileUpdateRequest updateRequest) {
+		sopt.changeGeneration(updateRequest.generation());
+		sopt.changePart(updateRequest.part());
 	}
 }

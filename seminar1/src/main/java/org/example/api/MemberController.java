@@ -2,13 +2,18 @@ package org.example.api;
 
 import java.net.URI;
 
+import org.example.dto.ApiResponse;
 import org.example.dto.request.MemberCreateRequest;
+import org.example.dto.request.MemberProfileUpdateRequest;
 import org.example.dto.response.MemberGetResponse;
 import org.example.service.MemberService;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -35,5 +40,17 @@ public class MemberController {
 	@PostMapping
 	public ResponseEntity<Void> createMember(@RequestBody MemberCreateRequest request) {
 		return ResponseEntity.created(memberService.create(request)).build();
+	}
+
+	@PutMapping("/update/v1")
+	public ApiResponse updateMember(@RequestBody final MemberProfileUpdateRequest request) {
+		memberService.update(request);
+		return ApiResponse.success(HttpStatus.OK);
+	}
+
+	@DeleteMapping("/delete/{memberId}/v1")
+	public ApiResponse updateMember(@PathVariable final Long memberId) {
+		memberService.delete(memberId);
+		return ApiResponse.success(HttpStatus.OK);
 	}
 }

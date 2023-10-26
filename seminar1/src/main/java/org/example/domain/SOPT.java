@@ -14,8 +14,16 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class SOPT {
 
-	private int generation;
+    private int generation;
 
-	@Enumerated(EnumType.STRING)
-	private Part part;
+    @Enumerated(EnumType.STRING)
+    private Part part;
+
+    protected void changeGeneration(int generation) {
+        this.generation = generation;
+    }
+
+    protected void changePart(Part part) {
+        this.part = part;
+    }
 }

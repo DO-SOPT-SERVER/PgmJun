@@ -4,7 +4,9 @@ import java.net.URI;
 
 import org.example.domain.Member;
 import org.example.dto.request.MemberCreateRequest;
+import org.example.dto.request.MemberProfileUpdateRequest;
 import org.example.dto.response.MemberGetResponse;
+import org.example.dto.response.MemberProfileUpdateResponse;
 import org.example.repository.MemberJpaRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -39,5 +41,21 @@ public class MemberService {
 			.build());
 
 		return URI.create(member.getId().toString());
+	}
+
+	@Transactional
+	public void update(MemberProfileUpdateRequest request) {
+		Member member = memberJpaRepository.findById(request.memberId())
+				.orElseThrow(() -> new IllegalArgumentException("존재하지 않는 맴버입니다."));
+
+		member.changeSoptProfile(request);
+	}
+
+	@Transactional
+	public void delete(Long memberId) {
+		Member member = memberJpaRepository.findById(memberId)
+				.orElseThrow(() -> new IllegalArgumentException("존재하지 않는 맴버입니다."));
+
+		memberJpaRepository.delete(member);
 	}
 }
