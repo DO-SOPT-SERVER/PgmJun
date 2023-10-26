@@ -46,7 +46,7 @@ public class HealthCheck {
 	}
 
 	@RequestMapping("/v6")
-	public ApiResponse healthCheckV6() {
-		return ApiResponse.success(HttpStatus.OK);
+	public ApiResponse<String> healthCheckV6() {
+		return ApiResponse.success(HttpStatus.OK, "Health Check 성공");
 	}
 }
