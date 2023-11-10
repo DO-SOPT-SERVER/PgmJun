@@ -5,6 +5,7 @@ import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.example.dto.request.PostCreateRequest;
 import org.example.dto.response.PostGetResponse;
+import org.example.service.PostRetrieveService;
 import org.example.service.PostService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -22,15 +23,16 @@ public class PostController {
     private static final String CUSTOM_AUTH_ID = "X-Auth-Id";
 
     private final PostService postService;
+    private final PostRetrieveService postRetrieveService;
 
     @GetMapping("/{postId}")
     public ResponseEntity<PostGetResponse> getPostById(@PathVariable Long postId) {
-        return ResponseEntity.ok(postService.getById(postId));
+        return ResponseEntity.ok(postRetrieveService.getById(postId));
     }
 
     @GetMapping
     public ResponseEntity<List<PostGetResponse>> getPosts(@RequestHeader(CUSTOM_AUTH_ID) Long memberId) {
-        return ResponseEntity.ok(postService.getPosts(memberId));
+        return ResponseEntity.ok(postRetrieveService.getPosts(memberId));
     }
 
     @PostMapping

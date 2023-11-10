@@ -21,7 +21,6 @@ public class PostService {
 
     private final PostJpaRepository postJpaRepository;
     private final MemberJpaRepository memberJpaRepository;
-    private final CategoryService categoryService;
 
     @Transactional
     public String create(PostCreateRequest request, Long memberId) {
@@ -41,25 +40,9 @@ public class PostService {
         post.updateContent(request.content());
     }
 
-    public List<PostGetResponse> getPosts(Long memberId) {
-        return postJpaRepository.findAllByMemberId(memberId)
-                .stream()
-                .map(post -> PostGetResponse.of(post, getCategoryByPost(post)))
-                .toList();
-    }
-
-    public PostGetResponse getById(Long postId) {
-        Post post = postJpaRepository.findById(postId).orElseThrow(() -> new EntityNotFoundException("해당하는 게시글이 없습니다."));
-        return PostGetResponse.of(post, getCategoryByPost(post));
-    }
-
     @Transactional
     public void deleteById(Long postId) {
         Post post = postJpaRepository.findById(postId).orElseThrow(() -> new EntityNotFoundException("해당하는 게시글이 없습니다."));
         postJpaRepository.delete(post);
-    }
-
-    private Category getCategoryByPost(Post post) {
-        return categoryService.getByCategoryId(post.getCategoryId());
     }
 }

@@ -9,6 +9,7 @@ import org.example.dto.ApiResponse;
 import org.example.dto.request.MemberCreateRequest;
 import org.example.dto.request.MemberProfileUpdateRequest;
 import org.example.dto.response.MemberGetResponse;
+import org.example.service.MemberRetrieveService;
 import org.example.service.MemberService;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -28,10 +29,11 @@ import lombok.RequiredArgsConstructor;
 public class MemberController {
 
 	private final MemberService memberService;
+	private final MemberRetrieveService memberRetrieveService;
 
 	@GetMapping("/{memberId}")
 	public ApiResponse<MemberGetResponse> getMemberProfile(@PathVariable Long memberId) {
-		return ApiResponse.success(HttpStatus.OK, FIND_MEMBER_PROFILE_SUCCESS_MESSAGE, memberService.getMemberById(memberId));
+		return ApiResponse.success(HttpStatus.OK, FIND_MEMBER_PROFILE_SUCCESS_MESSAGE, memberRetrieveService.getMemberById(memberId));
 	}
 
 	@PostMapping("/create")
