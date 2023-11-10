@@ -15,13 +15,15 @@ public class MemberService {
 
     private final MemberJpaRepository memberJpaRepository;
 
-    public void create(MemberCreateRequest request) {
-        memberJpaRepository.save(Member.builder()
+    public String create(MemberCreateRequest request) {
+        Member member = memberJpaRepository.save(Member.builder()
                 .name(request.name())
                 .nickname(request.nickname())
                 .age(request.age())
                 .sopt(request.sopt())
                 .build());
+
+        return member.getId().toString();
     }
 
     public void update(MemberProfileUpdateRequest request) {
