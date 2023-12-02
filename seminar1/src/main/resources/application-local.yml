@@ -21,3 +21,17 @@ spring:
   sql:
     init:
       mode: always
+
+  servlet:
+    multipart:
+      enabled: true
+      max-file-size: 3MB
+      max-request-size: 5MB
+
+aws-property:
+  access-key: 123456677
+  secret-key: 123456782
+  region: ap-northeast-2
+
+jwt:
+  secret: jangchungdongwangjokbalbossam1234
