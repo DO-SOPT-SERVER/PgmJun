@@ -1,5 +1,6 @@
 package org.example.domain;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Embedded;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -14,28 +15,29 @@ import org.example.dto.request.MemberProfileUpdateRequest;
 @Entity
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class Member {
+public class Member extends BaseEntity {
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
-	private String name;
-	private String nickname;
-	private int age;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "MEMBER_ID")
+    private Long id;
+    private String name;
+    private String nickname;
+    private int age;
 
-	@Embedded
-	private SOPT sopt;
+    @Embedded
+    private SOPT sopt;
 
-	@Builder
-	public Member(String name, String nickname, int age, SOPT sopt) {
-		this.name = name;
-		this.nickname = nickname;
-		this.age = age;
-		this.sopt = sopt;
-	}
+    @Builder
+    public Member(String name, String nickname, int age, SOPT sopt) {
+        this.name = name;
+        this.nickname = nickname;
+        this.age = age;
+        this.sopt = sopt;
+    }
 
-	public void changeSoptProfile(MemberProfileUpdateRequest updateRequest) {
-		sopt.changeGeneration(updateRequest.generation());
-		sopt.changePart(updateRequest.part());
-	}
+    public void changeSoptProfile(MemberProfileUpdateRequest updateRequest) {
+        sopt.changeGeneration(updateRequest.generation());
+        sopt.changePart(updateRequest.part());
+    }
 }
